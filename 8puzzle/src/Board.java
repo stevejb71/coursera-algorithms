@@ -19,10 +19,7 @@ public class Board {
         int count = 0;
         for (int r = 0; r < dimension(); ++r) {
             for (int c = 0; c < dimension(); ++c) {
-                final int expected = (c == dimension() - 1 && r == dimension() - 1)
-                                     ? 0
-                                     : 1 + r * 3 + c;
-                if (blocks[r][c] != expected) {
+                if (blocks[r][c] != goalAt(r, c)) {
                     ++count;
                 }
             }
@@ -35,7 +32,7 @@ public class Board {
     }
 
     public boolean isGoal() {
-        return false;
+        return hamming() == 0;
     }
 
     public Board twin() {
@@ -52,5 +49,11 @@ public class Board {
 
     public String toString() {
         return "";
+    }
+
+    private int goalAt(int r, int c) {
+        return (c == dimension() - 1 && r == dimension() - 1)
+               ? 0
+               : 1 + r * 3 + c;
     }
 }

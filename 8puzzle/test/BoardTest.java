@@ -7,6 +7,11 @@ public class BoardTest {
             new int[] {4, 2 ,5},
             new int[] {7, 8, 6}
     });
+    private final Board goal = new Board(new int[][] {
+            new int[] {1, 2, 3},
+            new int[] {4, 5, 6},
+            new int[] {7, 8, 0}
+    });
 
     @Test
     public void dimensions_is_correct() {
@@ -15,6 +20,17 @@ public class BoardTest {
 
     @Test
     public void hamming_is_correct() {
+        assertEquals(0, goal.hamming());
         assertEquals(5, example.hamming());
+    }
+
+    @Test
+    public void isGoal_on_non_goal_board() {
+        assertFalse(example.isGoal());
+    }
+
+    @Test
+    public void isGoal_on_goal_board() {
+        assertTrue(goal.isGoal());
     }
 }
