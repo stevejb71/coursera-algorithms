@@ -1,7 +1,7 @@
 public class FastCollinearPoints {
     private LineSegment[] lineSegments;
 
-    public FastCollinearPoints() {
+    public FastCollinearPoints(Point[] points) {
         this.lineSegments = new LineSegment[0];
     }
 

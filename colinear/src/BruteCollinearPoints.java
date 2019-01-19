@@ -29,6 +29,7 @@ public class BruteCollinearPoints {
             }
         }
         final List<LineSegment> lineSegments = new ArrayList<>();
+        points = points.clone();
         Arrays.sort(points);
         for (int i = 0; i < points.length - 3; ++i) {
             final Point p0 = points[i];
@@ -59,6 +60,6 @@ public class BruteCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        return lineSegments;
+        return lineSegments.clone();
     }
 }
