@@ -33,4 +33,26 @@ public class BoardTest {
     public void isGoal_on_goal_board() {
         assertTrue(goal.isGoal());
     }
+
+    @Test
+    public void equals_edge_cases() {
+        assertNotEquals(goal, null);
+        assertEquals(goal, goal);
+    }
+
+    @Test
+    public void equals_on_copy() {
+        final Board exampleCopy = new Board(new int[][] {
+                new int[] {0, 1, 3},
+                new int[] {4, 2 ,5},
+                new int[] {7, 8, 6}
+        });
+        assertEquals(example, exampleCopy);
+        assertEquals(exampleCopy, example);
+    }
+
+    @Test
+    public void equals_on_distinct() {
+        assertNotEquals(example, goal);
+    }
 }

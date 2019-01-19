@@ -4,6 +4,8 @@
  *  Description:
  **************************************************************************** */
 
+import java.util.Arrays;
+
 public class Board {
     private int[][] blocks;
 
@@ -39,8 +41,17 @@ public class Board {
         return null;
     }
 
-    public boolean equals(Object y) {
-        return false;
+    public boolean equals(Object other) {
+        if(!(other instanceof Board)) {
+            return false;
+        }
+        final Board otherBoard = (Board)other;
+        for(int r = 0; r < dimension(); ++r) {
+            if(!Arrays.equals(this.blocks[r], otherBoard.blocks[r])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Iterable<Board> neighbors() {
