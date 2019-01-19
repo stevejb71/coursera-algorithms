@@ -4,8 +4,6 @@
  *  Description:
  **************************************************************************** */
 
-package src;
-
 public class Solver {
     public Solver(Board initial) {
 

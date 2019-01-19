@@ -4,19 +4,30 @@
  *  Description:
  **************************************************************************** */
 
-package src;
-
 public class Board {
-    public Board(int[][] blocks) {
+    private int[][] blocks;
 
+    public Board(int[][] blocks) {
+        this.blocks = blocks;
     }
 
     public int dimension() {
-        return 0;
+        return blocks.length;
     }
 
     public int hamming() {
-        return 0;
+        int count = 0;
+        for (int r = 0; r < dimension(); ++r) {
+            for (int c = 0; c < dimension(); ++c) {
+                final int expected = (c == dimension() - 1 && r == dimension() - 1)
+                                     ? 0
+                                     : 1 + r * 3 + c;
+                if (blocks[r][c] != expected) {
+                    ++count;
+                }
+            }
+        }
+        return count;
     }
 
     public int manhattan() {
@@ -27,7 +38,7 @@ public class Board {
         return false;
     }
 
-    public Board twin()   {
+    public Board twin() {
         return null;
     }
 
