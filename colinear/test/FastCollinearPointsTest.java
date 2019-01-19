@@ -4,23 +4,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-public class BruteCollinearPointsTest {
+public class FastCollinearPointsTest {
     @Test
     public void no_4_collinear_points() {
-        BruteCollinearPoints brute = brute(p(0, 0), p(1, 1), p(2, 2), p(2, 3));
+        FastCollinearPoints fast = fast(p(0, 0), p(1, 1), p(2, 2), p(2, 3));
 
-        assertEquals(0, brute.numberOfSegments());
-        assertEquals(0, brute.segments().length);
+        assertEquals(0, fast.numberOfSegments());
+        assertEquals(0, fast.segments().length);
     }
 
     @Test
     public void collinear_points_in_list_of_4() {
-        BruteCollinearPoints brute = brute(p(0, 0), p(2, 2), p(1, 1), p(3, 3));
+        FastCollinearPoints fast = fast(p(0, 0), p(2, 2), p(1, 1), p(3, 3));
 
-        assertEquals(1, brute.numberOfSegments());
-        assertArrayEquals(brute.segments(), l(0, 0, 3, 3));
+        assertEquals(1, fast.numberOfSegments());
+        assertArrayEquals(fast.segments(), l(0, 0, 3, 3));
     }
 
     private static Point p(int x, int y) {
@@ -31,8 +31,8 @@ public class BruteCollinearPointsTest {
         return new LineSegment(p(x1, y1), p(x2, y2));
     }
 
-    private static BruteCollinearPoints brute(Point... points) {
-        return new BruteCollinearPoints(points);
+    private static FastCollinearPoints fast(Point... points) {
+        return new FastCollinearPoints(points);
     }
 
     private static void assertArrayEquals(LineSegment[] actual, LineSegment... expected) {
