@@ -44,7 +44,19 @@ public class Board {
     }
 
     public int manhattan() {
-        return 0;
+        int i = 0;
+        int manhattanDistance = 0;
+        for (int r = 0; r < dimension; ++r) {
+            for (int c = 0; c < dimension; ++c) {
+                final int block = blocks[i++] - 1;
+                if (block != -1) {
+                    final int blockR = block / dimension;
+                    final int blockC = block % dimension;
+                    manhattanDistance += Math.abs(blockR - r) + Math.abs(blockC - c);
+                }
+            }
+        }
+        return manhattanDistance;
     }
 
     public boolean isGoal() {

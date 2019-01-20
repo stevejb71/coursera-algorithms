@@ -84,6 +84,11 @@ public class BoardTest {
         assertTrue(neighbours.contains(b(8, 1, 3,  4, 6, 2,  7, 0, 5)));
     }
 
+    @Test
+    public void manhattan() {
+        assertEquals(10, websiteExample.manhattan());
+    }
+
     private static Board b(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9) {
         return new Board(new int[][] { new int[] {p1, p2, p3}, new int[] {p4, p5, p6}, new int[] {p7, p8, p9} });
     }
