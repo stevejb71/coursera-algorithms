@@ -63,7 +63,18 @@ public class Board {
     }
 
     public Board twin() {
-        return null;
+        final int indexOfNonBlank = (indexOfBlank() + 1) % blocks.length;
+        final int srcR = indexOfNonBlank / dimension;
+        final int destR;
+        if (srcR > 0) {
+            destR = srcR - 1;
+        } else if (srcR < dimension) {
+            destR = srcR + 1;
+        } else {
+            throw new IllegalStateException();
+        }
+        final int col = indexOfNonBlank % dimension;
+        return exchanged(destR, col, srcR, col);
     }
 
     public boolean equals(Object other) {

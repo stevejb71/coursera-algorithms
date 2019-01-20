@@ -87,6 +87,17 @@ public class BoardTest {
     @Test
     public void manhattan() {
         assertEquals(10, websiteExample.manhattan());
+        assertEquals(0, goal.manhattan());
+    }
+
+    @Test
+    public void twin_on_goal_has_manhattan_distance_of_2() {
+        assertEquals(2, goal.twin().manhattan());
+    }
+
+    @Test
+    public void exact_check_on_twin() {
+        assertEquals(b(0, 2, 3, 4, 1 ,5, 7, 8, 6), example.twin());
     }
 
     private static Board b(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9) {
