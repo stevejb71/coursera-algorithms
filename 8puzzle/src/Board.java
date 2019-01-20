@@ -21,7 +21,7 @@ public class Board {
         int count = 0;
         for (int r = 0; r < dimension(); ++r) {
             for (int c = 0; c < dimension(); ++c) {
-                if (blocks[r][c] != goalAt(r, c)) {
+                if (blocks[r][c] != 0 && blocks[r][c] != goalAt(r, c)) {
                     ++count;
                 }
             }

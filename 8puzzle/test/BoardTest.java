@@ -7,6 +7,11 @@ public class BoardTest {
             new int[] {4, 2 ,5},
             new int[] {7, 8, 6}
     });
+    private final Board websiteExample = new Board(new int[][] {
+            new int[] {8, 1, 3},
+            new int[] {4, 0 ,2},
+            new int[] {7, 6, 5}
+    });
     private final Board goal = new Board(new int[][] {
             new int[] {1, 2, 3},
             new int[] {4, 5, 6},
@@ -21,7 +26,12 @@ public class BoardTest {
     @Test
     public void hamming_is_correct() {
         assertEquals(0, goal.hamming());
-        assertEquals(5, example.hamming());
+        assertEquals(4, example.hamming());
+    }
+
+    @Test
+    public void hamming_on_website_example_board() {
+        assertEquals(5, websiteExample.hamming());
     }
 
     @Test
