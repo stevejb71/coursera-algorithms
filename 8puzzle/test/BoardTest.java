@@ -1,5 +1,12 @@
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
     private final Board example = new Board(new int[][] {
@@ -64,5 +71,20 @@ public class BoardTest {
     @Test
     public void equals_on_distinct() {
         assertNotEquals(example, goal);
+    }
+
+    @Test
+    public void neighbours() {
+        final List<Board> neighbours = new ArrayList<>();
+        websiteExample.neighbors().forEach(neighbours::add);
+        assertEquals(4, neighbours.size());
+        assertTrue(neighbours.contains(b(8, 0, 3,  4, 1, 2,  7, 6, 5)));
+        assertTrue(neighbours.contains(b(8, 1, 3,  0, 4, 2,  7, 6, 5)));
+        assertTrue(neighbours.contains(b(8, 1, 3,  4, 2, 0,  7, 6, 5)));
+        assertTrue(neighbours.contains(b(8, 1, 3,  4, 6, 2,  7, 0, 5)));
+    }
+
+    private static Board b(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9) {
+        return new Board(new int[][] { new int[] {p1, p2, p3}, new int[] {p4, p5, p6}, new int[] {p7, p8, p9} });
     }
 }
