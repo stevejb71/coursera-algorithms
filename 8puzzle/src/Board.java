@@ -7,7 +7,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.io.*;
 
 public class Board {
     private final int[] blocks;
@@ -68,11 +67,13 @@ public class Board {
     }
 
     public boolean equals(Object other) {
-        if (other == null || other.getClass() != Board.class) {
+        if (other != null && this.getClass() == other.getClass()) {
+            final Board otherBoard = (Board) other;
+            return Arrays.equals(this.blocks, otherBoard.blocks);
+        }
+        else {
             return false;
         }
-        final Board otherBoard = (Board) other;
-        return Arrays.equals(this.blocks, otherBoard.blocks);
     }
 
     public Iterable<Board> neighbors() {
@@ -96,19 +97,18 @@ public class Board {
     }
 
     public String toString() {
-        final StringWriter sw = new StringWriter();
-        final PrintWriter pw = new PrintWriter(sw);
-        pw.println(dimension);
+        final StringBuilder b = new StringBuilder();
+        b.append(dimension + "\n");
         int i = 0;
         for (int r = 0; r < dimension; ++r) {
             for (int c = 0; c < dimension; ++c) {
                 final String blockStr = blocks[i] == 0 ? "   " : String.format(" %2d ", blocks[i]);
                 i++;
-                pw.print(blockStr);
+                b.append(blockStr);
             }
-            pw.println();
+            b.append("\n");
         }
-        return sw.toString();
+        return b.toString();
     }
 
     private int goalAt(int r, int c) {
