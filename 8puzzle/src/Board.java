@@ -95,13 +95,13 @@ public class Board {
         if (blankRow > 0) {
             neighbours.add(exchanged(blankRow, blankCol, blankRow - 1, blankCol));
         }
-        if (blankRow < dimension) {
+        if (blankRow < dimension - 1) {
             neighbours.add(exchanged(blankRow, blankCol, blankRow + 1, blankCol));
         }
         if (blankCol > 0) {
             neighbours.add(exchanged(blankRow, blankCol, blankRow, blankCol - 1));
         }
-        if (blankCol < dimension) {
+        if (blankCol < dimension - 1) {
             neighbours.add(exchanged(blankRow, blankCol, blankRow, blankCol + 1));
         }
         return neighbours;
@@ -109,15 +109,15 @@ public class Board {
 
     public String toString() {
         final StringBuilder b = new StringBuilder();
-        b.append(dimension + "\n");
+        b.append(dimension);
         int i = 0;
         for (int r = 0; r < dimension; ++r) {
+            b.append("\n");
             for (int c = 0; c < dimension; ++c) {
-                final String blockStr = blocks[i] == 0 ? "   " : String.format(" %2d ", blocks[i]);
+                final String blockStr = String.format(" %2d", blocks[i]);
                 i++;
                 b.append(blockStr);
             }
-            b.append("\n");
         }
         return b.toString();
     }

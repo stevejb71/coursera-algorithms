@@ -100,6 +100,13 @@ public class BoardTest {
         assertEquals(b(0, 2, 3, 4, 1 ,5, 7, 8, 6), example.twin());
     }
 
+    @Test
+    public void toString_matches_required_format() {
+        final String s = b(0, 2, 3, 4, 1 ,5, 7, 8, 6).toString();
+
+        assertEquals("3\n  0  2  3\n  4  1  5\n  7  8  6", s);
+    }
+
     private static Board b(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9) {
         return new Board(new int[][] { new int[] {p1, p2, p3}, new int[] {p4, p5, p6}, new int[] {p7, p8, p9} });
     }
