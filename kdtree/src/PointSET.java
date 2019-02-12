@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
-import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,7 +17,7 @@ public class PointSET {
     }
 
     public void insert(Point2D p) {
-        points.add(p);
+        points.add(throwIfNull(p));
     }
 
     public boolean contains(Point2D p) {
@@ -26,9 +25,7 @@ public class PointSET {
     }
 
     public void draw() {
-        for (Point2D point : points) {
-            StdDraw.point(point.x(), point.y());
-        }
+        points.forEach(Point2D::draw);
     }
 
     public Iterable<Point2D> range(RectHV rect) {
