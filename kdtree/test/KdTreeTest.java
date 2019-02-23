@@ -158,21 +158,77 @@ public class KdTreeTest {
       H  0.862 0.825
       I  0.785 0.725
       J  0.499 0.208
+
+    - student sequence of kd-tree nodes involved in calls to Point2D methods:
+      A C D E F B G J H I
+    - reference sequence of kd-tree nodes involved in calls to Point2D methods:
+      A B G J
+
+      Nearest is D (d^2 = 0.03368)
+
+      Tree:      A
+            C         B
+          D   F     G    H
+         E           J  I
      */
     @Test
     public void nearest_example2() {
-        insert(0.372, 0.497);
-        insert(0.564, 0.413);
-        insert(0.226, 0.577);
-        insert(0.144, 0.179);
-        insert(0.083, 0.51 );
-        insert(0.32,  0.708);
-        insert(0.417, 0.362);
-        insert(0.862, 0.825);
-        insert(0.785, 0.725);
-        insert(0.499, 0.208);
+        insert(0.372, 0.497); // A
+        insert(0.564, 0.413); // B
+        insert(0.226, 0.577); // C
+        insert(0.144, 0.179); // D
+        insert(0.083, 0.51); // E
+        insert(0.32, 0.708); // F
+        insert(0.417, 0.362); // G
+        insert(0.862, 0.825); // H
+        insert(0.785, 0.725); // I
+        insert(0.499, 0.208); // J
 
-        assertEquals(new Point2D(0.499, 0.208), tree.nearest(new Point2D(0.47, 0.12)));
+        assertEquals(new Point2D(0.144, 0.179), tree.nearest(new Point2D(0.196, 0.003)));
+    }
+
+    /*
+      * input10.txt
+    - student   nearest() = (0.32, 0.708)
+    - reference nearest() = (0.32, 0.708)
+    - performs incorrect traversal of kd-tree during call to nearest()
+    - query point = (0.53, 0.78)
+    - sequence of points inserted:
+      A  0.372 0.497
+      B  0.564 0.413
+      C  0.226 0.577
+      D  0.144 0.179
+      E  0.083 0.51
+      F  0.32 0.708
+      G  0.417 0.362
+      H  0.862 0.825
+      I  0.785 0.725
+      J  0.499 0.208
+    - student sequence of kd-tree nodes involved in calls to Point2D methods:
+      A B H I C F D
+    - reference sequence of kd-tree nodes involved in calls to Point2D methods:
+      A B H I C F
+    - failed on trial 71 of 1000
+
+      Tree:      A
+            C         B
+          D   F     G    H
+         E           J  I
+     */
+    @Test
+    public void nearest_on_input10() {
+        insert(0.372, 0.497); // A
+        insert(0.564, 0.413); // B
+        insert(0.226, 0.577); // C
+        insert(0.144, 0.179); // D
+        insert(0.083, 0.51);  // E
+        insert(0.32, 0.708);  // F
+        insert(0.417, 0.362); // G
+        insert(0.862, 0.825); // H
+        insert(0.785, 0.725); // I
+        insert(0.499, 0.208); // J
+
+        assertEquals(new Point2D(0.32, 0.708), tree.nearest(new Point2D(0.53, 0.78)));
     }
 
     private List<Point2D> range(RectHV rect) {

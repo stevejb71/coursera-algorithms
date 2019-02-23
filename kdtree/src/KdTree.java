@@ -126,46 +126,84 @@ public class KdTree {
                 candidate = this.value;
             }
             if (level % 2 == 0) {
-                final double x = value.x();
-                if (left != null && diffSqr(left.value.x(), x) <= minSoFar) {
-                    final Point2D leftCandidate = left.nearest(p, minSoFar, candidate);
-                    final double nextDistSq = p.distanceSquaredTo(leftCandidate);
-                    if (nextDistSq < minSoFar) {
-                        minSoFar = nextDistSq;
-                        candidate = leftCandidate;
+                final double x = p.x();
+                final boolean pointIsOnLeft = x < value.x();
+                if (pointIsOnLeft) {
+                    if (left != null) {
+                        final Point2D leftCandidate = left.nearest(p, minSoFar, candidate);
+                        final double distToLeftCandidate = p.distanceSquaredTo(leftCandidate);
+                        if (distToLeftCandidate < minSoFar) {
+                            minSoFar = distToLeftCandidate;
+                            candidate = leftCandidate;
+                        }
+                    }
+                    if (right != null && diffSqr(value.x(), x) < minSoFar) {
+                        final Point2D rightCandidate = right.nearest(p, minSoFar, candidate);
+                        if (p.distanceSquaredTo(rightCandidate) < minSoFar) {
+                            return rightCandidate;
+                        }
                     }
                 }
-                if (right != null && diffSqr(right.value.x(), x) <= minSoFar) {
-                    final Point2D rightCandidate = right.nearest(p, minSoFar, candidate);
-                    final double nextDistSq = p.distanceSquaredTo(rightCandidate);
-                    if (nextDistSq < minSoFar) {
-                        candidate = rightCandidate;
+                else {
+                    if (right != null) {
+                        final Point2D rightCandidate = right.nearest(p, minSoFar, candidate);
+                        final double distToRightCandidate = p.distanceSquaredTo(rightCandidate);
+                        if (distToRightCandidate < minSoFar) {
+                            minSoFar = distToRightCandidate;
+                            candidate = rightCandidate;
+                        }
+                    }
+                    if (left != null && diffSqr(value.x(), x) < minSoFar) {
+                        final Point2D leftCandidate = left.nearest(p, minSoFar, candidate);
+                        if (p.distanceSquaredTo(leftCandidate) < minSoFar) {
+                            return leftCandidate;
+                        }
                     }
                 }
             }
             else {
-                final double y = value.y();
-                if (left != null && diffSqr(left.value.y(), y) <= minSoFar) {
-                    final Point2D leftCandidate = candidate = left.nearest(p, minSoFar, candidate);
-                    final double nextDistSq = p.distanceSquaredTo(leftCandidate);
-                    if (nextDistSq < minSoFar) {
-                        minSoFar = nextDistSq;
-                        candidate = leftCandidate;
+                final double y = p.y();
+                final boolean pointIsOnBottom = y < value.y();
+                if (pointIsOnBottom) {
+                    if (left != null) {
+                        final Point2D leftCandidate = left.nearest(p, minSoFar, candidate);
+                        final double distToLeftCandidate = p.distanceSquaredTo(leftCandidate);
+                        if (distToLeftCandidate < minSoFar) {
+                            minSoFar = distToLeftCandidate;
+                            candidate = leftCandidate;
+                        }
                     }
+                    if (right != null && diffSqr(value.y(), y) < minSoFar) {
+                        final Point2D rightCandidate = right.nearest(p, minSoFar, candidate);
+                        if (p.distanceSquaredTo(rightCandidate) < minSoFar) {
+                            return rightCandidate;
+                        }
+                    }
+
                 }
-                if (right != null && diffSqr(right.value.y(), y) <= minSoFar) {
-                    final Point2D rightCandidate = candidate = right.nearest(p, minSoFar, candidate);
-                    final double nextDistSq = p.distanceSquaredTo(rightCandidate);
-                    if (nextDistSq < minSoFar) {
-                        candidate = rightCandidate;
+                else {
+                    if (right != null) {
+                        final Point2D rightCandidate = right.nearest(p, minSoFar, candidate);
+                        final double distToRightCandidate = p.distanceSquaredTo(rightCandidate);
+                        if (distToRightCandidate < minSoFar) {
+                            minSoFar = distToRightCandidate;
+                            candidate = rightCandidate;
+                        }
                     }
+                    if (left != null && diffSqr(value.y(), y) < minSoFar) {
+                        final Point2D leftCandidate = left.nearest(p, minSoFar, candidate);
+                        if (p.distanceSquaredTo(leftCandidate) < minSoFar) {
+                            return leftCandidate;
+                        }
+                    }
+
                 }
             }
             return candidate;
         }
 
         private static double diffSqr(double a, double b) {
-            return 0; // (a - b) * (a - b);
+            return (a - b) * (a - b);
         }
 
         private boolean insertLeft(Point2D p) {
